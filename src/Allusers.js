@@ -2,13 +2,20 @@ import { useEffect, useState } from "react";
 import * as React from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
-function UsingFetch() {
+
+function Allusers() {
+
+  const navigate = useNavigate();
+  
   const [users, setUsers] = React.useState([]);
   const f = async () => {
     const res = await fetch("https://reqres.in/api/users");
     const json = await res.json();
+    console.log("json", json);
     setUsers(json.data);
+    
   };
   React.useEffect(() => {
     f();
@@ -22,15 +29,18 @@ function UsingFetch() {
         {users.length &&
           users.map((user) => {
             return (
-              <div key={user.id}>
+              
+              <div key={user.id} >
                 
+               
                 <p>
-                  <strong> {user.first_name} </strong>
-                  <strong> {user.last_name} </strong>
+                  <strong onClick={() => navigate(`/users/${user.id}`)}> {user.first_name} </strong>
+                  <strong onClick={() => navigate(`/users/${user.id}`)}> {user.last_name} </strong>
                 </p>
                 
-                <img key={user.avatar} src={user.avatar} />
-                <p> {user.email}</p>
+                
+               
+                
               </div>
             );
           })}
@@ -39,7 +49,6 @@ function UsingFetch() {
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<UsingFetch />, rootElement);
 
-export default UsingFetch;
+
+export default Allusers;

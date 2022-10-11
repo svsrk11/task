@@ -1,9 +1,10 @@
 import React from "react";
 
 import { BrowserRouter ,Router, Routes, Route, Link } from "react-router-dom";
-
-
-import UsingFetch from "./UsingFetch";
+import{ Home }from "./Home";
+import { NoMatch } from './NoMatch'
+import Allusers from "./Allusers";
+import { UserDetails } from "./UserDetails";
 
 
 const App = () => {
@@ -28,7 +29,14 @@ const App = () => {
           
               
         <Routes>
-          <Route path="/users" element={<UsingFetch/> } />
+          
+        <Route path='/' element={<Home/>}>
+        </Route>
+        <Route path='users' element={<Allusers/>}>
+        </Route>
+        <Route path='users/:userId' element={<UserDetails />} />
+
+        <Route path='*' element={<NoMatch />} />
         
         </Routes>
           
